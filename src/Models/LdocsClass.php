@@ -12,4 +12,8 @@ class LdocsClass extends Model
     public function methods() {
         return $this->hasMany("Mdemet\Ldocs\Models\LdocsClassMethod");
     }
+
+    public function activeMethods() {
+        return $this->hasMany("Mdemet\Ldocs\Models\LdocsClassMethod")->where('active', 1);
+    }    
 }

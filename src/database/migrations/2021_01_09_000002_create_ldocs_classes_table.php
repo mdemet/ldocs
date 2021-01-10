@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLdocsClassMethodsTable extends Migration
+class CreateLdocsClassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateLdocsClassMethodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ldocs_class_methods', function (Blueprint $table) {
+        Schema::create('ldocs_classes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('ldocs_class_id')->unsigned()->index()->nullable();
+            $table->bigInteger('ldocs_class_namespace_id')->unsigned()->index()->nullable();
             $table->string("name");
-            $table->string("url")->nullable();
             $table->text("description")->nullable();
+            $table->boolean("active")->default(1);
             $table->timestamps();
-            $table->foreign('ldocs_class_id')->references('id')->on('ldocs_classes')->onDelete('cascade');
+            $table->foreign('ldocs_class_namespace_id')->references('id')->on('ldocs_class_namespaces')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateLdocsClassMethodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ldocs_class_methods');
+        Schema::dropIfExists('ldocs_classes');
     }
 }

@@ -18,40 +18,60 @@ class LdocsController extends Controller
 
 
     public function index() {
-        $class_types = LdocsClassType::all();
-
-        // foreach($class_types as $class_type) {
-        //     echo "<h1>" . $class_type->name . "</h1>";
-        //     foreach ($class_type->namespaces as $namespace) {
-        //         echo "<h2>" . $namespace->name . "</h2>";
-        //         foreach ($namespace->classes as $class) {
-        //             echo "<h3>" . $class->name . "</h3>";
-        //             echo "<ul>";
-        //             foreach ($class->methods as $method) {
-        //                 echo "<li>" . $method->name. "</li>";
-        //             }
-        //             echo "</ul>";
-
-        //         }
-        //     }
-        // }
-
-        return view("ldocs::index", ['class_types' => $class_types]);
+        $class_types = LdocsClassType::where('active', 1)->get();
+        return view("ldocs::index", ['class_types' =>$class_types, 'edit' => false]);
     }
 
-    public function ajaxSave(Request $request) {
-        if ($request->type == "class") {
-            LdocsClass::where('id', $request->id)->update(['description' => $request->description]);
-        }
-        else if ($request->type == "method") {
-            LdocsClassMethod::where('id', $request->id)->update(['description' => $request->description]);
-        }        
+
+    public function edit() {
+        $class_types = LdocsClassType::all();
+        return view("ldocs::index", ['class_types' => $class_types, 'edit' => true]);
+    }
+
+
+    // saves the description for a class or a method
+    public function ajaxSaveDescription(Request $request) {
+        switch ($request->type) {
+            case "class":
+                LdocsClass::where('id', $request->id)->update(['description' => $request->description]);
+                break;
+            case "method":
+                LdocsClassMethod::where('id', $request->id)->update(['description' => $request->description]);
+                break;
+            default:
+                return response()->json("error");
+                break;
+        }     
         return response()->json("success");
     }
 
 
+    // toggle any item's active status
+    public function ajaxToggleActive(Request $request) {
+        $new_state = ($request->active == "true") ? 1 : 0;
+        switch($request->type) {
+            case "class_type":
+                LdocsClassType::where('id', $request->id)->update(['active' => $new_state]);
+                break;
+            case "namespace":
+                LdocsClassNamespace::where('id', $request->id)->update(['active' => $new_state]);
+                break;
+            case "class":
+                LdocsClass::where('id', $request->id)->update(['active' => $new_state]);
+                break;
+            case "method":
+                LdocsClassMethod::where('id', $request->id)->update(['active' => $new_state]);
+                break;
+            default:
+                return response()->json("error");
+                break;                                     
+        }
+        return response()->json("success");
+    }    
 
-    public function discoverClasses() {
+
+
+    public function scanProject() {
 
         // get a list of all the classes
         $composer_classes = require_once base_path('vendor/composer/autoload_classmap.php');

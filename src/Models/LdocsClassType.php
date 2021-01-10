@@ -11,4 +11,7 @@ class LdocsClassType extends Model
         return $this->hasMany("Mdemet\Ldocs\Models\LdocsClassNamespace");
     }
 
+    public function activeNamespaces() {
+        return $this->hasMany("Mdemet\Ldocs\Models\LdocsClassNamespace")->where('active', 1);
+    }
 }
