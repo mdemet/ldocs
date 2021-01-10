@@ -14,8 +14,8 @@ class CreateLdocsClassNamespacesTable extends Migration
     public function up()
     {
         Schema::create('ldocs_class_namespaces', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('ldocs_class_type_id')->unsigned()->index()->nullable();
+            $table->increments('id');
+            $table->unsignedInteger('ldocs_class_type_id')->index();
             $table->string("name");
             $table->boolean("active")->default(1);
             $table->timestamps();

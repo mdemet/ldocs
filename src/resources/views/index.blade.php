@@ -51,10 +51,16 @@
                                                 @if($edit)
                                                     <input type="checkbox" id="active_class_{{$class->id}}" @if($class->active == 1) checked @endif onclick='toggleActive({{$class->id}}, "class", this.checked, this.id);' />
                                                     <label for="active_class_{{$class->id}}"></label>                        
-                                                    <textarea class="form-control" id="class_{{$class->id}}" rows="1" onblur='saveDescription({{$class->id}}, "class", this.value, this.id);'>{{ $class->description }}</textarea>
-                                                @else
-                                                    {{ $class->description }}
                                                 @endif
+                                            </div>
+                                            <div class="col-12">
+                                                @if($edit)
+                                                    <textarea class="form-control" id="class_{{$class->id}}" rows="2" onblur='saveDescription({{$class->id}}, "class", this.value, this.id);'>{{ $class->description }}</textarea>
+                                                @else
+                                                    <p>{{ $class->description }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="col-12">
                                                 @if($edit)
                                                     @php $class_methods = $class->methods @endphp
                                                 @else 

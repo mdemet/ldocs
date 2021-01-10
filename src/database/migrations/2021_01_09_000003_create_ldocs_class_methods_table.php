@@ -14,8 +14,8 @@ class CreateLdocsClassMethodsTable extends Migration
     public function up()
     {
         Schema::create('ldocs_class_methods', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('ldocs_class_id')->unsigned()->index()->nullable();
+            $table->increments('id');
+            $table->unsignedInteger('ldocs_class_id')->index();
             $table->string("name");
             $table->string("url")->nullable();
             $table->text("description")->nullable();

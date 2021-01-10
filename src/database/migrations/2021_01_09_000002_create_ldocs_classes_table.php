@@ -14,8 +14,8 @@ class CreateLdocsClassesTable extends Migration
     public function up()
     {
         Schema::create('ldocs_classes', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('ldocs_class_namespace_id')->unsigned()->index()->nullable();
+            $table->increments('id');
+            $table->unsignedInteger('ldocs_class_namespace_id')->index();
             $table->string("name");
             $table->text("description")->nullable();
             $table->boolean("active")->default(1);
