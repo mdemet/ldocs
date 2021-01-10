@@ -1,3 +1,3 @@
 # LDocs
 
-## Generate documentation scaffolding for Laravel projects
+## Generate documentation scaffolding for Laravel projects...
