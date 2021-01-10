@@ -1,0 +1,26 @@
+{
+    "name": "mdemet/ldocs",
+    "description": "Generate documentation scaffolding for Laravel projects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mdemet",
+            "email": "m.demetriou13@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Mdemet\\Ldocs\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mdemet\\Ldocs\\LdocsServiceProvider"
+            ]
+        }
+    }
+}
