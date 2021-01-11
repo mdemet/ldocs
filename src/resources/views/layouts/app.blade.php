@@ -18,16 +18,24 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     
     <style>
-
+        #sidebar {
+            position: fixed;
+            width: 350px;
+            overflow-y: scroll;
+            top: 50px;
+            bottom: 0;
+        }
         .navbar {
-            position: fixed !important;
+            /* position: fixed !important; */
             width: 100% !important;
             z-index: 9999 !important;
             height: 40px !important;
+            
         }
 
         .content {
-            padding-top: 40px !important;
+            /* margin-bottom: 20px; */
+            /* padding-top: 20px !important; */
         }
 
         h1, h2, h3 {
@@ -47,12 +55,34 @@
         .namespace-wrapper,
         .class-wrapper {
             padding: 10px;
-            margin: 20px;
+            margin: 15px;
             border-radius: 10px;
         }
 
         .class-wrapper {
             border: 1px solid rgb(196, 196, 196);
+        }
+
+
+        a {
+            padding: 0px 10px !important;
+
+        }        
+        li.list-group-item {
+            padding: 0px 10px !important;
+            /* padding: 0px !important; */
+            border: 0px !important;
+        }
+        .first {
+
+        }
+
+        .second {
+            margin-left: 25px;
+        }
+
+        .third {
+            margin-left: 50px;
         }
         
         
